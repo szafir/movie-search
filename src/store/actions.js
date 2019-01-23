@@ -43,22 +43,22 @@ export const performSearch = (searchPhrase, releaseYear, page) => {
         }
 
         
-        new Promise((resolve, rejected) => {
-            setTimeout(() => {
-                    axios.get("/mocks/rambo_p1.json")
-                        .then(resp => {
-                                resp.data.Search = resp.data.Search || [];
-                                resp.data.totalResults = resp.data.totalResults || 0;
-                                resolve(resp.data);
-                            })
-                    }, 20)
-                })
-        // axios.get("http://www.omdbapi.com/", {params})
-        //     .then(resp => {
-        //         resp.data.Search = resp.data.Search || [];
-        //         resp.data.totalResults = resp.data.totalResults || 0;
-        //         return resp.data;
-        //     })
+        // new Promise((resolve, rejected) => {
+            // setTimeout(() => {
+            //         axios.get("/mocks/rambo_p1.json")
+            //             .then(resp => {
+            //                     resp.data.Search = resp.data.Search || [];
+            //                     resp.data.totalResults = resp.data.totalResults || 0;
+            //                     resolve(resp.data);
+            //                 })
+            //         }, 20)
+            //     })
+        axios.get("http://www.omdbapi.com/", {params})
+            .then(resp => {
+                resp.data.Search = resp.data.Search || [];
+                resp.data.totalResults = resp.data.totalResults || 0;
+                return resp.data;
+            })
             .then((resp) => {
                 dispatch(searchSuccess(resp, searchPhrase, releaseYear, page));
             })
