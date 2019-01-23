@@ -1,45 +1,42 @@
 import * as actionTypes from "../store/actionTypes";
 
-const initialState = {
+const INITIAL_STATE = {
     searchPhrase: '',
+    releaseYear: '',
     visibleMovies: [],
     totalResults: 0,
     currentPage: 1,
     isLoading: false
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
-
         case actionTypes.SEARCH_START:
             return {
                 ...state,
                 isLoading: true
             }
         case actionTypes.SEARCH_CLEAR:
+            const releaseYear = state.releaseYear;
             return {
-                ...state,
-                isLoading: false,
-                totalResults: 0,
-                visibleMovies: [],
-                searchPhrase: ''
+                ...INITIAL_STATE,
+                releaseYear
             }
         case actionTypes.SEARCH_SUCCESS:
-
             const visibleMovies = [...action.moviesResponse.Search];
-            let ind = Math.floor(Math.random()* 10);
+            let ind = Math.floor(Math.random() * 10);
             const elem = visibleMovies.splice(ind, 1);
             visibleMovies.unshift(...elem);
             return {
                 ...state,
-                searchPhrase: action.searchPhrase, 
+                searchPhrase: action.searchPhrase,
                 totalResults: action.moviesResponse.totalResults,
-                currentPage: action.currentPage, 
+                currentPage: action.currentPage,
+                releaseYear: action.releaseYear,
                 visibleMovies,
                 isLoading: false
             }
-       
         default:
             return state;
     }

@@ -12,11 +12,12 @@ export const clearSearch = () => {
     };
 };
 
-export const searchSuccess = (moviesResponse, searchPhrase, currentPage) => {
+export const searchSuccess = (moviesResponse, searchPhrase, releaseYear, currentPage) => {
     return {
         type: actionTypes.SEARCH_SUCCESS,
-        moviesResponse, 
-        searchPhrase, 
+        moviesResponse,
+        searchPhrase,
+        releaseYear,
         currentPage
     };
 };
@@ -28,7 +29,7 @@ export const searchFail = (error) => {
     };
 };
 
-export const performSearch = (searchPhrase, page) => {
+export const performSearch = (searchPhrase, releaseYear, page) => {
     return dispatch => {
         page = page || 1;
         dispatch(searchStart());
@@ -40,11 +41,11 @@ export const performSearch = (searchPhrase, page) => {
                     })
             }, 10)
         })
-        .then((resp) => {
-            dispatch(searchSuccess(resp, searchPhrase, page));
-        })
-        .catch((error) => {
-            dispatch(searchFail(error));
-        })
+            .then((resp) => {
+                dispatch(searchSuccess(resp, searchPhrase, releaseYear, page));
+            })
+            .catch((error) => {
+                dispatch(searchFail(error));
+            })
     };
 };

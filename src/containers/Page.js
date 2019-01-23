@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
 import InputBase from "@material-ui/core/InputBase";
 import Typography from "@material-ui/core/Typography";
 import SearchIcon from "@material-ui/icons/Search";
@@ -12,6 +11,7 @@ import { connect } from "react-redux";
 import * as actions from "../store/actions";
 import debounce from "lodash.debounce";
 import Pagination from "../components/Pagination";
+import YearInput from "../components/YearInput";
 
 const styles = theme => ({
     root: {
@@ -21,9 +21,18 @@ const styles = theme => ({
     },
     paper: {
         padding: theme.spacing.unit * 2,
-        textAlign: 'center',
         color: theme.palette.text.secondary,
+        display: "flex"
     },
+    inputInput: {
+        paddingLeft: theme.spacing.unit,
+        paddingRight: theme.spacing.unit,
+        width: "100%"
+    },
+    container: {
+        width: 1000,
+        margin: "50px auto"
+    }
 });
 
 class Page extends Component {
@@ -34,7 +43,7 @@ class Page extends Component {
 
     onSearchDebounced = debounce(() => {
         if (this.state.searchPhrase.length > 2) {
-            this.props.performSearch(this.state.searchPhrase);
+            this.props.performSearch(this.state.searchPhrase, this.props.releaseYear);
         }
         else if (this.state.searchPhrase === '') {
             this.props.clearSearch();
@@ -47,6 +56,10 @@ class Page extends Component {
         })
         this.onSearchDebounced();
     }
+
+    handleYearChange = (year) => {
+        this.props.performSearch(this.state.searchPhrase, year);
+    }
     componentDidMount() {
         this.setState({
             searchPhrase: 'developement'
@@ -55,84 +68,60 @@ class Page extends Component {
     }
 
     changePage = (page) => {
-        this.props.changePage(this.state.searchPhrase, page);
+        this.props.changePage(this.state.searchPhrase, this.props.releaseYear, page);
     }
 
-
     render() {
-        const containerStyles = {
-            width: 1000,
-            margin: "50px auto"
-        }
         const { classes } = this.props;
         const messsage = this.props.searchPhrase ? <Typography className={classes.root} variant="h5" component="h3">{`No results found for "${this.props.searchPhrase}".`}</Typography> : null;
-        const searchStyles = {
-            width: "100%"
-        }
         return (
-            <div style={containerStyles}>
-                <Grid container spacing={24}>
-                    <Grid item xs={12}>
-                        <Typography className={classes.root} variant="h3" component="h3" align="center">
-                            Movie search
+            <Grid container spacing={24} className={classes.container}>
+                <Grid item xs={12}>
+                    <Typography variant="h3" component="h3" align="center">
+                        Movie search
                         </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Paper className={classes.paper}>
-                            <InputBase
-                                placeholder="Type something to find movies"
-                                style={searchStyles}
-                                value={this.state.searchPhrase}
-                                onChange={this.handleSearchChange}
-                                classes={{
-                                    // root: classes.inputRoot,
-                                    // input: classes.inputInput,
-                                }}
-                            />
-                        </Paper>
-                    </Grid>
-
-                    <Grid item xs={8}>
-
-                    </Grid>
-                    <Grid item xs={4} align="right">
+                </Grid>
+                <Grid item xs={12}>
+                    <Paper className={classes.paper}>
+                        <SearchIcon fontSize="large" />
+                        <InputBase
+                            placeholder="Type something to find movies"
+                            className={classes.inputInput}
+                            value={this.state.searchPhrase}
+                            onChange={this.handleSearchChange}
+                        />
+                        <YearInput yearChange={this.handleYearChange} />
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} align="right">
+                    {this.props.totalResults > 0 && <Pagination totalResults={this.props.totalResults} page={this.props.currentPage} changePage={this.changePage} />}
+                </Grid>
+                <Grid item xs={12}>
+                    <Paper>
                         {
                             this.props.totalResults > 0 ?
-                                <Pagination totalResults={this.props.totalResults} page={this.props.currentPage} changePage={this.changePage} /> : null
+                                <MoviesList items={this.props.visibleMovies} /> : messsage
                         }
-
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Paper>
-                            {
-                                this.props.totalResults > 0 ?
-                                    <MoviesList items={this.props.visibleMovies} /> : messsage
-                            }
-                        </Paper>
-                    </Grid>
+                    </Paper>
                 </Grid>
-
-            </div>
+            </Grid>
         );
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        visibleMovies: state.visibleMovies,
-        totalResults: state.totalResults,
-        currentPage: state.currentPage,
-        searchPhrase: state.searchPhrase,
-        isLoading: state.isLoading,
-    };
-};
+const mapStateToProps = state => ({
+    visibleMovies: state.visibleMovies,
+    totalResults: state.totalResults,
+    currentPage: state.currentPage,
+    searchPhrase: state.searchPhrase,
+    releaseYear: state.releaseYear,
+    isLoading: state.isLoading,
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        performSearch: phrase => dispatch(actions.performSearch(phrase)),
-        clearSearch: () => dispatch(actions.clearSearch()),
-        changePage: (phrase, page) => dispatch(actions.performSearch(phrase, page))
-    }
-};
+const mapDispatchToProps = dispatch => ({
+    performSearch: (phrase, releaseYear) => dispatch(actions.performSearch(phrase, releaseYear)),
+    clearSearch: () => dispatch(actions.clearSearch()),
+    changePage: (phrase, releaseYear, page) => dispatch(actions.performSearch(phrase, releaseYear, page))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Page));

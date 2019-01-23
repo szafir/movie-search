@@ -4,15 +4,20 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import BrokenImage from "@material-ui/icons/BrokenImage";
+import { withStyles } from "@material-ui/core/styles";
 
 
-const Movie = (props) => {
-    const avatarStyles = {
+const styles = () => ({
+    avatar: {
         width: 25,
         height: 25
     }
-    let poster = props.item.Poster === "N/A" ? <BrokenImage />: <Avatar style={avatarStyles} src={props.item.Poster}></Avatar>;
-    const name = `${props.item.Title} (${props.item.Year})`
+});
+
+const Movie = (props) => {
+    const { classes } = props;
+    let poster = props.item.Poster === "N/A" ? <BrokenImage /> : <Avatar className={classes.avatar} src={props.item.Poster}></Avatar>;
+    const name = `${props.item.Title} (${props.item.Year})`;
     return (
         <ListItem key={props.item.imdbID} divider={!props.isLast} button>
             <ListItemAvatar>
@@ -25,4 +30,4 @@ const Movie = (props) => {
     );
 }
 
-export default Movie;
+export default withStyles(styles)(Movie);
