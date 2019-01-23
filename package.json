@@ -6,6 +6,8 @@
     "@material-ui/core": "^3.9.0",
     "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "lodash.debounce": "^4.0.8",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -17,7 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test src/tests",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

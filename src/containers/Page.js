@@ -59,12 +59,12 @@ class Page extends Component {
     handleYearChange = (year) => {
         this.props.performSearch(this.state.searchPhrase, year);
     }
-    componentDidMount() {
-        this.setState({
-            searchPhrase: 'rambo'
-        })
-        this.onSearchDebounced();
-    }
+    // componentDidMount() {
+    //     this.setState({
+    //         searchPhrase: 'rambo'
+    //     })
+    //     this.onSearchDebounced();
+    // }
 
     changePage = (page) => {
         this.props.changePage(this.state.searchPhrase, this.props.releaseYear, page);

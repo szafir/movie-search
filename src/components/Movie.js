@@ -14,6 +14,9 @@ const styles = () => ({
 });
 
 const Movie = (props) => {
+    if(!props.item) {
+        return null;
+    }
     const { classes } = props;
     let poster = props.item.Poster === "N/A" ? <BrokenImage /> : <Avatar className={classes.avatar} src={props.item.Poster}></Avatar>;
     const name = `${props.item.Title} (${props.item.Year})`;

@@ -45,7 +45,7 @@ export const performSearch = (searchPhrase, releaseYear, page) => {
         
         new Promise((resolve, rejected) => {
             setTimeout(() => {
-                    axios.get("/mocks/rambo_p2.json")
+                    axios.get("/mocks/rambo_p1.json")
                         .then(resp => {
                                 resp.data.Search = resp.data.Search || [];
                                 resp.data.totalResults = resp.data.totalResults || 0;
