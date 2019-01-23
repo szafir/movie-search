@@ -12,11 +12,12 @@ export const clearSearch = () => {
     };
 };
 
-export const searchSuccess = (moviesResponse, searchPhrase) => {
+export const searchSuccess = (moviesResponse, searchPhrase, currentPage) => {
     return {
         type: actionTypes.SEARCH_SUCCESS,
         moviesResponse, 
-        searchPhrase
+        searchPhrase, 
+        currentPage
     };
 };
 
@@ -27,8 +28,9 @@ export const searchFail = (error) => {
     };
 };
 
-export const performSearch = (searchPhrase) => {
+export const performSearch = (searchPhrase, page) => {
     return dispatch => {
+        page = page || 1;
         dispatch(searchStart());
         new Promise((resolve, rejected) => {
             setTimeout(() => {
@@ -39,7 +41,7 @@ export const performSearch = (searchPhrase) => {
             }, 10)
         })
         .then((resp) => {
-            dispatch(searchSuccess(resp, searchPhrase));
+            dispatch(searchSuccess(resp, searchPhrase, page));
         })
         .catch((error) => {
             dispatch(searchFail(error));

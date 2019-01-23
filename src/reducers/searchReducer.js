@@ -35,6 +35,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 searchPhrase: action.searchPhrase, 
                 totalResults: action.moviesResponse.totalResults,
+                currentPage: action.currentPage, 
                 visibleMovies,
                 isLoading: false
             }

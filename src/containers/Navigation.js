@@ -12,7 +12,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import * as actions from "../store/actions";
 
-import debounce from "lodash.debounce";
+
 
 const styles = theme => ({
     root: {
@@ -86,31 +86,9 @@ const styles = theme => ({
 
 class Navigation extends Component {
 
-    state = {
-        searchPhrase: ""
-    }
+    
 
-    onSearchDebounced = debounce(() => {
-        if(this.state.searchPhrase.length > 2) {
-            this.props.performSearch(this.state.searchPhrase);
-        } 
-        else if(this.state.searchPhrase === '') {
-            this.props.clearSearch();
-        }
-    }, 300);
-
-    handleSearchChange = (event) => {
-        this.setState({
-            searchPhrase: event.target.value
-        })
-        this.onSearchDebounced();
-    }
-    componentDidMount() {
-        this.setState({
-            searchPhrase: 'developement'
-        })
-        this.onSearchDebounced();
-    }
+   
     render() {
         const { classes } = this.props;
         const searchStyle = {
@@ -126,7 +104,7 @@ class Navigation extends Component {
                         <div className={classes.searchIcon}>
                             {this.props.isLoading ? <CircularProgress style={searchStyle}/> : <SearchIcon /> }
                         </div>
-                        <InputBase
+                        {/* <InputBase
                             placeholder="Find movies"
                             value={this.state.searchPhrase}
                             onChange={this.handleSearchChange}
@@ -134,7 +112,7 @@ class Navigation extends Component {
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
                             }}
-                        />
+                        /> */}
                     </div>
                     
                     <div className={classes.grow} />

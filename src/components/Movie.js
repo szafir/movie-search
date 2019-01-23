@@ -14,7 +14,7 @@ const Movie = (props) => {
     let poster = props.item.Poster === "N/A" ? <BrokenImage />: <Avatar style={avatarStyles} src={props.item.Poster}></Avatar>;
     const name = `${props.item.Title} (${props.item.Year})`
     return (
-        <ListItem key={props.item.imdbID} >
+        <ListItem key={props.item.imdbID} divider={!props.isLast} button>
             <ListItemAvatar>
                 {poster}
             </ListItemAvatar>
