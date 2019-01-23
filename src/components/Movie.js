@@ -6,7 +6,6 @@ import Avatar from "@material-ui/core/Avatar";
 import BrokenImage from "@material-ui/icons/BrokenImage";
 import { withStyles } from "@material-ui/core/styles";
 
-
 const styles = () => ({
     avatar: {
         width: 25,

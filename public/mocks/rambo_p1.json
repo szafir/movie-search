@@ -23,6 +23,27 @@
         },
         {
             "Title": "Rambo",
+            "Year": "1986",
+            "imdbID": "tt0222619",
+            "Type": "series",
+            "Poster": "https://images-na.ssl-images-amazon.com/images/M/MV5BOTVmMjU2ODItODk2NS00ZWJkLTgwOTEtZTMzZDNjNzhhZjkzXkEyXkFqcGdeQXVyNjExODE1MDc@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Rambo III",
+            "Year": "1989",
+            "imdbID": "tt0301766",
+            "Type": "game",
+            "Poster": "N/A"
+        },
+        {
+            "Title": "Rambo: First Blood Part II",
+            "Year": "1986",
+            "imdbID": "tt0301768",
+            "Type": "game",
+            "Poster": "http://ia.media-imdb.com/images/M/MV5BNzRmM2EwYzAtZTMzNC00ZDg5LWE5YzktOWM5NTk4OGJhYWM4XkEyXkFqcGdeQXVyMjY3MjUzNDk@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Rambo",
             "Year": "2012",
             "imdbID": "tt3107798",
             "Type": "movie",
@@ -30,47 +51,26 @@
         },
         {
             "Title": "Rambo",
+            "Year": "1987",
+            "imdbID": "tt0301765",
+            "Type": "game",
+            "Poster": "http://ia.media-imdb.com/images/M/MV5BYmMxZGVjYzYtNWY4ZC00ZjAwLWFjNWQtOWFjNGEzNDQ2ZDM3XkEyXkFqcGdeQXVyMTgwOTE5NDk@._V1_SX300.jpg"
+        },
+        {
+            "Title": "Rambo: The Video Game",
+            "Year": "2014",
+            "imdbID": "tt4291054",
+            "Type": "game",
+            "Poster": "N/A"
+        },
+        {
+            "Title": "Rambo",
             "Year": "2003",
             "imdbID": "tt0389308",
             "Type": "movie",
             "Poster": "N/A"
-        },
-        {
-            "Title": "Young-gu Rambo",
-            "Year": "1990",
-            "imdbID": "tt0334762",
-            "Type": "movie",
-            "Poster": "N/A"
-        },
-        {
-            "Title": "The Weaponry of Rambo",
-            "Year": "2008",
-            "imdbID": "tt1394384",
-            "Type": "movie",
-            "Poster": "N/A"
-        },
-        {
-            "Title": "A Score to Settle: The Music of Rambo",
-            "Year": "2008",
-            "imdbID": "tt1394371",
-            "Type": "movie",
-            "Poster": "N/A"
-        },
-        {
-            "Title": "Art of War: Completing Rambo",
-            "Year": "2008",
-            "imdbID": "tt1394308",
-            "Type": "movie",
-            "Poster": "N/A"
-        },
-        {
-            "Title": "Rambo Tanggo Part III",
-            "Year": "1984",
-            "imdbID": "tt0269406",
-            "Type": "movie",
-            "Poster": "N/A"
         }
     ],
-    "totalResults": "29",
+    "totalResults": "38",
     "Response": "True"
 }

@@ -33,19 +33,37 @@ export const performSearch = (searchPhrase, releaseYear, page) => {
     return dispatch => {
         page = page || 1;
         dispatch(searchStart());
+        const params = {
+            apikey: "35ffa7b",
+            s: searchPhrase,
+            page: page
+        }
+        if (releaseYear) {
+            params['y'] = releaseYear;
+        }
+
+        
         new Promise((resolve, rejected) => {
             setTimeout(() => {
-                axios.get("/mocks/rambo_p1.json")
-                    .then(resp => {
-                        resolve(resp.data);
-                    })
-            }, 10)
-        })
+                    axios.get("/mocks/rambo_p2.json")
+                        .then(resp => {
+                                resp.data.Search = resp.data.Search || [];
+                                resp.data.totalResults = resp.data.totalResults || 0;
+                                resolve(resp.data);
+                            })
+                    }, 20)
+                })
+        // axios.get("http://www.omdbapi.com/", {params})
+        //     .then(resp => {
+        //         resp.data.Search = resp.data.Search || [];
+        //         resp.data.totalResults = resp.data.totalResults || 0;
+        //         return resp.data;
+        //     })
             .then((resp) => {
                 dispatch(searchSuccess(resp, searchPhrase, releaseYear, page));
             })
             .catch((error) => {
                 dispatch(searchFail(error));
-            })
+            });
     };
 };

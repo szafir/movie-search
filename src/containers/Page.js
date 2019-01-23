@@ -5,7 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import InputBase from "@material-ui/core/InputBase";
 import Typography from "@material-ui/core/Typography";
 import SearchIcon from "@material-ui/icons/Search";
-
 import MoviesList from "../components/MoviesList";
 import { connect } from "react-redux";
 import * as actions from "../store/actions";
@@ -62,7 +61,7 @@ class Page extends Component {
     }
     componentDidMount() {
         this.setState({
-            searchPhrase: 'developement'
+            searchPhrase: 'rambo'
         })
         this.onSearchDebounced();
     }

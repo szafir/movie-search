@@ -25,9 +25,6 @@ const reducer = (state = INITIAL_STATE, action) => {
             }
         case actionTypes.SEARCH_SUCCESS:
             const visibleMovies = [...action.moviesResponse.Search];
-            let ind = Math.floor(Math.random() * 10);
-            const elem = visibleMovies.splice(ind, 1);
-            visibleMovies.unshift(...elem);
             return {
                 ...state,
                 searchPhrase: action.searchPhrase,
