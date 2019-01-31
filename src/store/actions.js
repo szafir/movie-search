@@ -12,13 +12,10 @@ export const clearSearch = () => {
     };
 };
 
-export const searchSuccess = (moviesResponse, searchPhrase, releaseYear, currentPage) => {
+export const searchSuccess = (payload) => {
     return {
         type: actionTypes.SEARCH_SUCCESS,
-        moviesResponse,
-        searchPhrase,
-        releaseYear,
-        currentPage
+        payload
     };
 };
 
@@ -29,9 +26,10 @@ export const searchFail = (error) => {
     };
 };
 
-export const performSearch = (searchPhrase, releaseYear, page) => {
+export const performSearch = (payload) => {
+    const { searchPhrase, releaseYear } = payload;
     return dispatch => {
-        page = page || 1;
+        const page = payload.page || 1;
         dispatch(searchStart());
         const params = {
             apikey: "35ffa7b",
@@ -42,25 +40,28 @@ export const performSearch = (searchPhrase, releaseYear, page) => {
             params['y'] = releaseYear;
         }
 
-        
         // new Promise((resolve, rejected) => {
-            // setTimeout(() => {
-            //         axios.get("/mocks/rambo_p1.json")
-            //             .then(resp => {
-            //                     resp.data.Search = resp.data.Search || [];
-            //                     resp.data.totalResults = resp.data.totalResults || 0;
-            //                     resolve(resp.data);
-            //                 })
-            //         }, 20)
-            //     })
-        axios.get("http://www.omdbapi.com/", {params})
+        // setTimeout(() => {
+        //         axios.get("/mocks/rambo_p1.json")
+        //             .then(resp => {
+        //                     resp.data.Search = resp.data.Search || [];
+        //                     resp.data.totalResults = resp.data.totalResults || 0;
+        //                     resolve(resp.data);
+        //                 })
+        //         }, 20)
+        //     })
+        //     .then((resp) => {
+        //         dispatch(searchSuccess({ moviesResponse: resp, searchPhrase, releaseYear, currentPage: page }));
+        //     })
+
+        axios.get("http://www.omdbapi.com/", { params })
             .then(resp => {
                 resp.data.Search = resp.data.Search || [];
                 resp.data.totalResults = resp.data.totalResults || 0;
                 return resp.data;
             })
             .then((resp) => {
-                dispatch(searchSuccess(resp, searchPhrase, releaseYear, page));
+                dispatch(searchSuccess({ moviesResponse: resp, searchPhrase, releaseYear, currentPage: page }));
             })
             .catch((error) => {
                 dispatch(searchFail(error));

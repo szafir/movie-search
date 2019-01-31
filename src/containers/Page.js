@@ -42,7 +42,7 @@ class Page extends Component {
 
     onSearchDebounced = debounce(() => {
         if (this.state.searchPhrase.length > 2) {
-            this.props.performSearch(this.state.searchPhrase, this.props.releaseYear);
+            this.props.performSearch({searchPhrase: this.state.searchPhrase, releaseYear: this.props.releaseYear});
         }
         else if (this.state.searchPhrase === '') {
             this.props.clearSearch();
@@ -57,17 +57,11 @@ class Page extends Component {
     }
 
     handleYearChange = (year) => {
-        this.props.performSearch(this.state.searchPhrase, year);
+        this.props.performSearch({ searchPhrase: this.state.searchPhrase, releaseYear: year });
     }
-    // componentDidMount() {
-    //     this.setState({
-    //         searchPhrase: 'rambo'
-    //     })
-    //     this.onSearchDebounced();
-    // }
 
     changePage = (page) => {
-        this.props.changePage(this.state.searchPhrase, this.props.releaseYear, page);
+        this.props.changePage({ searchPhrase: this.state.searchPhrase, releaseYear: this.props.releaseYear, page });
     }
 
     render() {
@@ -118,9 +112,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    performSearch: (phrase, releaseYear) => dispatch(actions.performSearch(phrase, releaseYear)),
+    performSearch: (payload) => dispatch(actions.performSearch(payload)),
     clearSearch: () => dispatch(actions.clearSearch()),
-    changePage: (phrase, releaseYear, page) => dispatch(actions.performSearch(phrase, releaseYear, page))
+    changePage: (payload) => dispatch(actions.performSearch(payload))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Page));

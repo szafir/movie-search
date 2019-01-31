@@ -24,13 +24,13 @@ const reducer = (state = INITIAL_STATE, action) => {
                 releaseYear
             }
         case actionTypes.SEARCH_SUCCESS:
-            const visibleMovies = [...action.moviesResponse.Search];
+            const visibleMovies = [...action.payload.moviesResponse.Search];
             return {
                 ...state,
-                searchPhrase: action.searchPhrase,
-                totalResults: action.moviesResponse.totalResults,
-                currentPage: action.currentPage,
-                releaseYear: action.releaseYear,
+                searchPhrase: action.payload.searchPhrase,
+                totalResults: action.payload.moviesResponse.totalResults,
+                currentPage: action.payload.currentPage,
+                releaseYear: action.payload.releaseYear,
                 visibleMovies,
                 isLoading: false
             }
