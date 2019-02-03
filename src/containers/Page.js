@@ -42,7 +42,7 @@ class Page extends Component {
 
     onSearchDebounced = debounce(() => {
         if (this.state.searchPhrase.length > 2) {
-            this.props.performSearch({searchPhrase: this.state.searchPhrase, releaseYear: this.props.releaseYear});
+            this.props.performSearch({ searchPhrase: this.state.searchPhrase, releaseYear: this.props.releaseYear, page: 1 });
         }
         else if (this.state.searchPhrase === '') {
             this.props.clearSearch();
@@ -57,7 +57,7 @@ class Page extends Component {
     }
 
     handleYearChange = (year) => {
-        this.props.performSearch({ searchPhrase: this.state.searchPhrase, releaseYear: year });
+        this.props.performSearch({ searchPhrase: this.state.searchPhrase, releaseYear: year, page: 1 });
     }
 
     changePage = (page) => {
